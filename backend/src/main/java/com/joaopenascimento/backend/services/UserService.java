@@ -1,10 +1,12 @@
 package com.joaopenascimento.backend.services;
 
-import com.joaopenascimento.backend.dto.PropertyDTO;
-import com.joaopenascimento.backend.dto.UserCreateDTO;
-import com.joaopenascimento.backend.dto.UserDTO;
-import com.joaopenascimento.backend.dto.UserUpdateDTO;
+import com.joaopenascimento.backend.dto.auth.RegisterDTO;
+import com.joaopenascimento.backend.dto.property.PropertyDTO;
+import com.joaopenascimento.backend.dto.user.UserCreateDTO;
+import com.joaopenascimento.backend.dto.user.UserDTO;
+import com.joaopenascimento.backend.dto.user.UserUpdateDTO;
 import com.joaopenascimento.backend.model.User;
+import com.joaopenascimento.backend.model.enums.UserRole;
 import com.joaopenascimento.backend.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -90,5 +92,26 @@ public class UserService {
         return user.getFavorites().stream()
                 .map(PropertyDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void register(RegisterDTO dto) {
+        if (userRepository.existsByEmail(dto.email())) {
+            throw new RuntimeException("Este email já está em uso");
+        }
+
+        User user = new User();
+        user.setName(dto.name());
+        user.setEmail(dto.email());
+        user.setPassword(passwordEncoder.encode(dto.password()));
+        user.setRole(UserRole.CLIENTE);
+
+        userRepository.save(user);
+    }
+
+    @Transactional(readOnly = true)
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
     }
 }

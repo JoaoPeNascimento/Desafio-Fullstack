@@ -1,4 +1,4 @@
-package com.joaopenascimento.backend.dto;
+package com.joaopenascimento.backend.dto.user;
 
 import com.joaopenascimento.backend.model.enums.UserRole;
 import jakarta.validation.constraints.Email;

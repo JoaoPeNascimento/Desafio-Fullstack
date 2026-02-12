@@ -23,18 +23,18 @@ public class Property {
     private Long id;
 
     @NotBlank
-    @Size(min =10, max = 100)
+    @Size(min = 10, max = 100)
     @Column(nullable = false)
     private String name;
 
     @NotBlank
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private PropertyType type; //CASA e APARTAMENTO
+    private PropertyType type;
 
     @Column(nullable = false)
     private Boolean active = true;
@@ -50,15 +50,19 @@ public class Property {
     private Integer bedrooms;
 
     @NotBlank
+    @Column(nullable = false)
     private String address;
 
     @NotBlank
+    @Column(nullable = false)
     private String city;
 
     @NotBlank
+    @Column(nullable = false)
     private String state;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "broker_id", nullable = false)
     private User broker;
 }
+

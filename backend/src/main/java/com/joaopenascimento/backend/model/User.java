@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,4 +51,5 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "property_id")
     )
     private Set<Property> favorites = new HashSet<>();
+    
 }

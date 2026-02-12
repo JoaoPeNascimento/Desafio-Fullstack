@@ -1,4 +1,4 @@
-package com.joaopenascimento.backend.dto;
+package com.joaopenascimento.backend.dto.property;
 
 import com.joaopenascimento.backend.model.enums.PropertyType;
 import jakarta.validation.constraints.NotBlank;
