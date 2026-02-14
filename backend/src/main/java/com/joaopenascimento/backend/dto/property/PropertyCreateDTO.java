@@ -14,6 +14,5 @@ public record PropertyCreateDTO(
         @NotNull @Positive Integer bedrooms,
         @NotBlank String address,
         @NotBlank String city,
-        @NotBlank String state,
-        @NotNull Long brokerId
+        @NotBlank String state
 ) {}

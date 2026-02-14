@@ -5,9 +5,14 @@ import com.joaopenascimento.backend.dto.property.PropertyDTO;
 import com.joaopenascimento.backend.dto.user.UserCreateDTO;
 import com.joaopenascimento.backend.dto.user.UserDTO;
 import com.joaopenascimento.backend.dto.user.UserUpdateDTO;
+import com.joaopenascimento.backend.model.Property;
 import com.joaopenascimento.backend.model.User;
 import com.joaopenascimento.backend.model.enums.UserRole;
+import com.joaopenascimento.backend.repositories.PropertyRepository;
 import com.joaopenascimento.backend.repositories.UserRepository;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +24,12 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PropertyRepository propertyRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PropertyRepository propertyRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.propertyRepository = propertyRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -34,14 +41,23 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public UserDTO findById(Long id) {
-        User user =  userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+    public UserDTO getMe() {
+        
+        User user = getAuthenticatedUser();
+
         return new UserDTO(user);
     }
 
     @Transactional
+    @PreAuthorize("hasRole('ADMIN')")
     public UserDTO create(UserCreateDTO dto) {
+        
+        User currentUser = getAuthenticatedUser();
+        
+        if (currentUser.getRole() != UserRole.ADMIN) {
+            throw new RuntimeException("Você não tem permissão para criar usuários.");
+        }
+        
         if (userRepository.existsByEmail(dto.email())) {
             throw new RuntimeException("Este email já está em uso.");
         }
@@ -57,41 +73,58 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserUpdateDTO dto) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    public UserDTO update(UserUpdateDTO dto) {
+        
+        User user = getAuthenticatedUser();
 
         if (dto.name() != null) {
             user.setName(dto.name());
-        }
-
-        if(dto.email() != null) {
-            if (!user.getEmail().equals(dto.email()) && userRepository.existsByEmail(dto.email())) {
-                throw new RuntimeException("Email já cadastrado");
-            }
-            user.setEmail(dto.email());
         }
 
         if(dto.password() != null) {
             user.setPassword(passwordEncoder.encode(dto.password()));
         }
 
-        if (dto.role() != null) {
-            user.setRole(dto.role());
-        }
-
         user = userRepository.save(user);
         return new UserDTO(user);
     }
 
-    @Transactional
-    public List<PropertyDTO> getFavorites(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("usuário não encontrado"));
+    @Transactional(readOnly = true)
+    public List<PropertyDTO> getFavorites() {
+        
+        User user = getAuthenticatedUser();
 
         return user.getFavorites().stream()
                 .map(PropertyDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void addFavorite(Long propertyId) {
+
+        User user = getAuthenticatedUser();
+
+        Property property = propertyRepository.findById(propertyId)
+                                .orElseThrow(() -> new RuntimeException("Imóvel não encontrado"));
+
+        if (user.getFavorites().contains(property)) {
+            throw new RuntimeException("Imóvel já está nos favoritos");
+        }
+
+        user.getFavorites().add(property);
+
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void removeFavorite(Long propertyId) {
+
+        User user = getAuthenticatedUser();
+
+        Property property = propertyRepository.findById(propertyId)
+                                .orElseThrow(() -> new RuntimeException("Imóvel não encontrado"));
+
+        user.getFavorites().remove(property);
     }
 
     @Transactional
@@ -113,5 +146,14 @@ public class UserService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+    }
+
+    public User getAuthenticatedUser() {
+        String email = SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
+
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuário autenticado não encontrado"));
     }
 }

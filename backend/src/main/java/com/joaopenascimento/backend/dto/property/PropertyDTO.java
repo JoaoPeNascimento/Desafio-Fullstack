@@ -13,6 +13,7 @@ public record PropertyDTO(
         String address,
         String city,
         String state,
+        Boolean active,
         Long brokerId,
         String brokerName
 ) {
@@ -27,6 +28,7 @@ public record PropertyDTO(
                 entity.getAddress(),
                 entity.getCity(),
                 entity.getState(),
+                entity.getActive(),
                 entity.getBroker().getId(),
                 entity.getBroker().getName()
         );
