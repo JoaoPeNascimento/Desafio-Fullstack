@@ -1,5 +1,6 @@
 package com.joaopenascimento.backend.exception;
 
+import java.time.Instant;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class GlobalExceptionHaandler {
                 .map(f -> f.getField() + ": " + f.getDefaultMessage())
                 .collect(Collectors.joining(", "));
         
-        StandardError err = new StandardError(status.value(), "Erro de validação", messages, request.getRequestURI());
+        StandardError err = new StandardError(Instant.now().toEpochMilli(), status.value(), "Erro de validação", messages, request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 
@@ -33,14 +34,14 @@ public class GlobalExceptionHaandler {
             status = HttpStatus.NOT_FOUND;
         }
         
-        StandardError err = new StandardError(status.value(), "Erro na requisição", e.getMessage(), request.getRequestURI());
+        StandardError err = new StandardError(Instant.now().toEpochMilli(), status.value(), "Erro na requisição", e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<StandardError> handleAccessDenied(AccessDeniedException e, HttpServletRequest request) {
-        HttpStatus status = HttpStatus.FORBIDDEN;
-        StandardError err = new StandardError(status.value(), "Acesso negado", "Você não tem permissão para realizar esta ação", request.getRequestURI());
+        HttpStatus status = HttpStatus.FORBIDDEN; // 403
+        StandardError err = new StandardError(Instant.now().toEpochMilli(), status.value(), "Acesso negado", "Você não tem permissão para realizar esta ação", request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 }
