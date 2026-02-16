@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum PropertyType {
     CASA("casa"),
+    TERRENO("terreno"),
     APARTAMENTO("apartamento");
 
     private String type;

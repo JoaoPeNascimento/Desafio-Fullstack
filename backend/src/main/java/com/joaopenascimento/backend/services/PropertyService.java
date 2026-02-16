@@ -97,6 +97,7 @@ public class PropertyService {
         property.setName(dto.name());
         property.setDescription(dto.description());
         property.setValue(dto.value());
+        property.setArea(dto.area());
         property.setBedrooms(dto.bedrooms());
         property.setAddress(dto.address());
         property.setCity(dto.city());
@@ -128,6 +129,8 @@ public class PropertyService {
         if (dto.description() != null) {property.setDescription(dto.description());}
 
         if (dto.value() != null) {property.setValue(dto.value());}
+
+        if (dto.area() != null) {property.setArea(dto.area());}
 
         if (dto.address() != null) {property.setAddress(dto.address());}
 

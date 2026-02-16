@@ -11,6 +11,7 @@ public record PropertyCreateDTO(
         @NotBlank String description,
         @NotNull PropertyType type,
         @NotNull @Positive Double value,
+        @NotNull @Positive Integer area,
         @NotNull @Positive Integer bedrooms,
         @NotBlank String address,
         @NotBlank String city,

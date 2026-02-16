@@ -10,6 +10,7 @@ public record PropertyUpdateDTO(
      String description,
      PropertyType type,
      @Positive Double value,
+     @Positive Integer area,
      @Positive Integer bedrooms,
      String address,
      String city,

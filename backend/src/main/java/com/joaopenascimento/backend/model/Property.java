@@ -44,6 +44,11 @@ public class Property {
     @Column(nullable = false)
     private Double value;
 
+    @NotNull(message = "A área é obrigatória")
+    @Positive(message = "A área deve ser positiva")
+    @Column(nullable = false)
+    private Integer area;
+
     @NotNull(message = "O número de quartos é obrigatório")
     @Positive(message = "O número de quartos deve ser positivo")
     @Column(nullable = false)

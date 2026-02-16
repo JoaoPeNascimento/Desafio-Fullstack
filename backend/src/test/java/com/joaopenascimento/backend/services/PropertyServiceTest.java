@@ -56,7 +56,7 @@ class PropertyServiceTest {
         });
 
         PropertyCreateDTO dto = new PropertyCreateDTO(
-            "Casa", "Descrição", PropertyType.CASA, 500.0, 2, "rua 1", "Recife", "PE"
+            "Casa", "Descrição", PropertyType.CASA, 500.0, 50, 2, "rua 1", "Recife", "PE"
         );
 
         PropertyDTO result = propertyService.create(dto);
@@ -75,7 +75,7 @@ class PropertyServiceTest {
         when(userService.getAuthenticatedUser()).thenReturn(cliente);
 
         PropertyCreateDTO dto = new PropertyCreateDTO(
-            "Casa", "Descrição", PropertyType.CASA, 500.0, 2, "rua 1", "Recife", "PE"
+            "Casa", "Descrição", PropertyType.CASA, 500.0, 50, 2, "rua 1", "Recife", "PE"
         );
 
         assertThrows(RuntimeException.class, () -> propertyService.create(dto));
@@ -100,7 +100,7 @@ class PropertyServiceTest {
         when(propertyRepository.save(any(Property.class))).thenReturn(property);
 
         PropertyUpdateDTO dto = new PropertyUpdateDTO(
-            "Casa nova", null, null, 900.0, null, null, null, null, null
+            "Casa nova", null, null, 900.0, null, null, null, null, null, null
         );
 
         PropertyDTO result = propertyService.update(10L, dto);
@@ -126,7 +126,7 @@ class PropertyServiceTest {
         when(userService.getAuthenticatedUser()).thenReturn(intruder);
         when(propertyRepository.findById(10L)).thenReturn(Optional.of(property));
 
-        PropertyUpdateDTO dto = new PropertyUpdateDTO("Casa", null, null, null, null, null, null, null, null);
+        PropertyUpdateDTO dto = new PropertyUpdateDTO("Casa", null, null, null, null, null, null, null, null, null);
 
         assertThrows(RuntimeException.class, () -> propertyService.update(10L, dto));
         verify(propertyRepository, never()).save(any());
