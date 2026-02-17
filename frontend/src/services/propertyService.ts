@@ -30,7 +30,7 @@ export const propertyService = {
 
     params.append("page", page.toString());
     params.append("size", size.toString());
-    params.append("sort", sort);
+    // params.append("sort", sort);
 
     if (filters.name) params.append("name", filters.name);
     if (filters.type) params.append("type", filters.type);
@@ -43,7 +43,7 @@ export const propertyService = {
     if (filters.minBedrooms)
       params.append("minBedrooms", filters.minBedrooms.toString());
 
-    const res = await fetch(`${API_BASE_URL}/property?${params.toString()}`, {
+    const res = await fetch(`${API_BASE_URL}/property`, {
       method: "GET",
       headers: getAuthHeaders(),
     });

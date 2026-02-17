@@ -1,0 +1,46 @@
+.Register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #ff4e00;
+}
+
+.Register form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75vh;
+  gap: 10px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.register-button {
+  width: 50%;
+  border-radius: 50px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.register-button:hover {
+  background-color: #cc3e00;
+  color: white;
+}
+
+.login-link {
+  margin-top: 15px;
+  background: none;
+  border: none;
+  color: #1976d2;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
