@@ -27,16 +27,16 @@ export interface PropertyCreateDTO {
 }
 
 export interface PropertyUpdateDTO {
-  name: string;
-  description: string;
-  type: "APARTAMENTO" | "CASA" | "TERRENO";
-  value: number;
-  area: number;
-  bedrooms: number;
-  address: string;
-  city: string;
-  state: string;
-  brokerId: number;
+  name?: string;
+  description?: string;
+  type?: "APARTAMENTO" | "CASA" | "TERRENO";
+  value?: number;
+  area?: number;
+  bedrooms?: number;
+  address?: string;
+  city?: string;
+  state?: string;
+  brokerId?: number;
 }
 
 export interface Page<T> {

@@ -59,7 +59,7 @@ export const userService = {
   },
 
   async getFavorites(): Promise<PropertyDTO[]> {
-    const res = await fetch(`${API_BASE_URL}/favorites`, {
+    const res = await fetch(`${API_BASE_URL}/user/favorites`, {
       method: "GET",
       headers: getAuthHeaders(),
     });
@@ -69,7 +69,7 @@ export const userService = {
   },
 
   async addFavorite(propertyId: number): Promise<void> {
-    const res = await fetch(`${API_BASE_URL}/favorites/${propertyId}`, {
+    const res = await fetch(`${API_BASE_URL}/user/favorites/${propertyId}`, {
       method: "POST",
       headers: getAuthHeaders(),
     });
@@ -78,7 +78,7 @@ export const userService = {
   },
 
   async removeFavorite(propertyId: number): Promise<void> {
-    const res = await fetch(`${API_BASE_URL}/favorites/${propertyId}`, {
+    const res = await fetch(`${API_BASE_URL}/user/favorites/${propertyId}`, {
       method: "DELETE",
       headers: getAuthHeaders(),
     });

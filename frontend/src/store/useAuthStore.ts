@@ -1,38 +1,48 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { jwtDecode } from "jwt-decode";
+import { JwtPayload } from "../types/jwt";
 
-// 1. Definimos a tipagem do nosso estado e das ações
 interface AuthState {
   token: string | null;
+  role: string | null;
+  id: number | null;
   isAuthenticated: boolean;
+
   login: (token: string) => void;
   logout: () => void;
 }
 
-// 2. Criamos a store
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       token: null,
+      role: null,
+      id: null,
       isAuthenticated: false,
 
-      // Ação de Login: salva o token e marca como autenticado
-      login: (token: string) =>
+      login: (token: string) => {
+        const decoded = jwtDecode<JwtPayload>(token);
+
         set({
           token,
+          role: decoded.role,
+          id: decoded.id,
           isAuthenticated: true,
-        }),
+        });
+      },
 
-      // Ação de Logout: limpa tudo
       logout: () =>
         set({
           token: null,
+          role: null,
+          id: null,
           isAuthenticated: false,
         }),
     }),
     {
-      name: "auth-storage", // Nome da chave que ficará salva no localStorage
-      storage: createJSONStorage(() => localStorage), // (Opcional) Define onde salvar. O padrão já é localStorage.
+      name: "auth-storage",
+      storage: createJSONStorage(() => localStorage),
     },
   ),
 );
