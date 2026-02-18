@@ -1,0 +1,29 @@
+.App-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #ff4e00;
+}
+
+.user-info {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-item {
+  gap: 2px;
+}
+
+#user-btn {
+  background-color: #f4f6f8;
+  color: #ff4e00;
+  width: 60px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
