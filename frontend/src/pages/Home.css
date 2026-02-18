@@ -29,6 +29,13 @@ h1 {
   gap: 5px;
 }
 
+.filter-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .App-header input {
   width: 100%;
   padding: 5px;
@@ -51,8 +58,20 @@ h1 {
   background-color: #cc3e00;
 }
 
+.banner {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .property-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
   gap: 20px;
+}
+
+.page-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }

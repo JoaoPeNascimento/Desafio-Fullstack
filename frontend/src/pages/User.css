@@ -1,18 +1,5 @@
-.Property-page {
+.User-page {
   padding: 10px;
-}
-
-.property-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
-  gap: 20px;
-}
-
-.add-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
 }
 
 .loading-container,
