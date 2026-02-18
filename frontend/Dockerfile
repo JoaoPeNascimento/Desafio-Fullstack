@@ -1,0 +1,28 @@
+FROM node:20-alpine AS build
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+
+ARG REACT_APP_CLOUDINARY_CLOUD_NAME
+ARG REACT_APP_CLOUDINARY_UPLOAD_PRESET
+
+ENV REACT_APP_CLOUDINARY_CLOUD_NAME=$REACT_APP_CLOUDINARY_CLOUD_NAME
+ENV REACT_APP_CLOUDINARY_UPLOAD_PRESET=$REACT_APP_CLOUDINARY_UPLOAD_PRESET
+
+RUN npm run build
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN npm install -g serve
+
+COPY --from=build /app/build ./build
+
+EXPOSE 80
+
+CMD ["serve", "-s", "build", "-l", "80"]
