@@ -10,6 +10,7 @@ export interface PropertyDTO {
   city: string;
   state: string;
   active: boolean;
+  imageUrls: string;
   brokerId: number;
   brokerName: string;
 }
@@ -24,6 +25,7 @@ export interface PropertyCreateDTO {
   address: string;
   city: string;
   state: string;
+  imageUrl: string;
 }
 
 export interface PropertyUpdateDTO {

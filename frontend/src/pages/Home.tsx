@@ -7,8 +7,10 @@ import Header from "../components/Header";
 import { Button, Pagination } from "@mui/material";
 import { FilterIcon } from "lucide-react";
 import PropertyFilterDialog from "../components/PropertyFilterDialog"; // Importe o novo componente
+import { useAuthStore } from "../store/useAuthStore";
 
 const Home = () => {
+  const role = useAuthStore((state) => state.role);
   const [properties, setProperties] = useState<PropertyDTO[]>([]);
   const [totalElements, setTotalElements] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -108,13 +110,17 @@ const Home = () => {
           <div className="loading">Carregando imóveis...</div>
         ) : (
           <div className="property-grid">
-            {properties.map((property) => (
-              <PropertyCard
-                nome={property.name}
-                key={property.id}
-                {...property}
-              />
-            ))}
+            {properties
+              .filter(
+                (property) => role === "ADMIN" || property.active === true,
+              )
+              .map((property) => (
+                <PropertyCard
+                  nome={property.name}
+                  key={property.id}
+                  {...property}
+                />
+              ))}
           </div>
         )}
       </main>

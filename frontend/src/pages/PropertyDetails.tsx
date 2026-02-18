@@ -106,6 +106,7 @@ const PropertyDetails = () => {
       const updatedProperty = await propertyService.toggleStatus(Number(id));
       setProperty(updatedProperty);
     } catch (err) {
+      console.error("Erro ao alternar status:", err);
       alert("Não foi possível alternar o status.");
     }
   };
@@ -150,6 +151,10 @@ const PropertyDetails = () => {
     );
   }
 
+  const images = property.imageUrls.split(",");
+
+  console.log("imóvel:" + JSON.stringify(property));
+
   return (
     <div className="Property-details">
       <Header />
@@ -161,7 +166,7 @@ const PropertyDetails = () => {
 
         <div className="property-card">
           <div className="property-image-placeholder">
-            <span>Foto do Imóvel</span>
+            <img src={images[0] || ""} alt="Imagem do imóvel" />
           </div>
 
           <div className="property-info">
