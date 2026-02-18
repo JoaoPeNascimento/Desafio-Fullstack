@@ -1,0 +1,9 @@
+.Property-page {
+  padding: 10px;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
+  gap: 20px;
+}
