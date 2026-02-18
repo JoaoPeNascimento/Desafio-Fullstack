@@ -2,6 +2,7 @@
 
 .App {
   padding: 10px;
+  /* background-color: #ffff; */
   color: #ff4e00;
 }
 
@@ -35,17 +36,6 @@ h1 {
   border: 1px solid rgb(197, 197, 197);
   border-radius: 15px;
 }
-#user-button {
-  background-color: white;
-  color: #ff4e00;
-  width: 60px;
-  height: 60px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .App-header button {
   background-color: #ff4e00;
@@ -59,4 +49,10 @@ h1 {
 
 .App-header button:hover {
   background-color: #cc3e00;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
+  gap: 20px;
 }
