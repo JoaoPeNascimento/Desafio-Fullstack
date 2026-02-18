@@ -11,6 +11,7 @@ type PropertyCardProps = {
   area: number;
   bedrooms: number;
   value: number;
+  imageUrls: string;
 };
 
 const PropertyCard = ({
@@ -22,43 +23,62 @@ const PropertyCard = ({
   area,
   bedrooms,
   value,
+  imageUrls,
 }: PropertyCardProps) => {
+  const mainImage = imageUrls?.split(",")[0];
+
   return (
-    <Card sx={{ maxWidth: 360, borderRadius: 3, boxShadow: 3 }}>
-      <CardContent>
-        {/* nome do imóvel */}
-        <Typography
-          variant="h6"
-          fontWeight="bold"
-          component={Link}
-          to={`/property/${id}`}
+    <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+      <CardContent
+        sx={{
+          display: "flex",
+          gap: 2,
+          alignItems: "center",
+        }}
+      >
+        {/* IMAGEM */}
+        <Box
+          component="img"
+          src={mainImage}
+          alt={nome}
           sx={{
-            textDecoration: "none",
-            color: "inherit",
-            cursor: "pointer",
-            "&:hover": { color: "primary.main" },
+            width: 120,
+            height: 100,
+            objectFit: "cover",
+            borderRadius: 2,
+            flexShrink: 0,
           }}
-        >
-          {nome}
-        </Typography>
+        />
 
-        {/* endereço */}
-        <Typography variant="body2" color="text.secondary" mb={1}>
-          {address}, {city} - {state}
-        </Typography>
+        {/* CONTEÚDO */}
+        <Box flex={1}>
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            component={Link}
+            to={`/property/${id}`}
+            sx={{
+              textDecoration: "none",
+              color: "inherit",
+              "&:hover": { color: "primary.main" },
+            }}
+          >
+            {nome}
+          </Typography>
 
-        {/* quartos + area */}
-        <Box display="flex" alignItems="center" gap={2} mb={2}>
-          <Box display="flex" alignItems="center" gap={0.5}>
-            <BedDouble size={18} />
-            <Typography variant="body2">{bedrooms}</Typography>
+          <Typography variant="body2" color="text.secondary" mb={1}>
+            {address}, {city} - {state}
+          </Typography>
+
+          <Box display="flex" alignItems="center" gap={2} mb={1}>
+            <Box display="flex" alignItems="center" gap={0.5}>
+              <BedDouble size={18} />
+              <Typography variant="body2">{bedrooms}</Typography>
+            </Box>
+
+            <Typography variant="body2">{area} m²</Typography>
           </Box>
 
-          <Typography variant="body2">{area} m²</Typography>
-        </Box>
-
-        {/* valor */}
-        <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="h6" fontWeight="bold" color="primary">
             R$ {value.toLocaleString("pt-BR")}
           </Typography>

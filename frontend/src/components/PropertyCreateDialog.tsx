@@ -144,7 +144,7 @@ const PropertyCreateDialog = ({
               startIcon={<Upload size={18} />}
               disabled={loading}
             >
-              Selecionar Fotos
+              Selecionar Foto
               <input
                 type="file"
                 hidden
@@ -205,7 +205,7 @@ const PropertyCreateDialog = ({
               display="block"
               sx={{ mt: 1, color: "text.secondary" }}
             >
-              {files.length} foto(s) selecionada(s)
+              {files.length} foto selecionada
             </Typography>
           </Box>
 
