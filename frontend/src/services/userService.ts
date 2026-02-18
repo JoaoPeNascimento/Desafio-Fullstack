@@ -32,7 +32,7 @@ export const userService = {
   },
 
   async update(dto: UserUpdateDTO): Promise<UserDTO> {
-    const res = await fetch(`${API_BASE_URL}/update`, {
+    const res = await fetch(`${API_BASE_URL}/user/update`, {
       method: "PUT",
       headers: getAuthHeaders(),
       body: JSON.stringify(dto),
@@ -43,7 +43,7 @@ export const userService = {
   },
 
   async create(dto: UserCreateDTO): Promise<UserDTO> {
-    const res = await fetch(`${API_BASE_URL}/create`, {
+    const res = await fetch(`${API_BASE_URL}/user/create`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(dto),

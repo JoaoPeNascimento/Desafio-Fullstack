@@ -60,7 +60,7 @@ const Login = () => {
 
         <Button
           type="submit"
-          variant="outlined"
+          variant="contained"
           color="primary"
           className="login-button"
         >

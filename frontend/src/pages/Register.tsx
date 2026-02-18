@@ -1,8 +1,8 @@
 import { Alert, Button, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import "./Register.css";
 import { authService } from "../services/authService";
 import { useState } from "react";
+import "./Register.css";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ const Register = () => {
 
         <Button
           type="submit"
-          variant="outlined"
+          variant="contained"
           color="primary"
           className="register-button"
         >

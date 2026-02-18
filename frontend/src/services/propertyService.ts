@@ -19,7 +19,6 @@ const getAuthHeaders = () => {
 };
 
 export const propertyService = {
-  // GET com paginação e filtros
   async getAll(
     filters: PropertyFilter = {},
     page = 0,
