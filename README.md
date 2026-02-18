@@ -66,6 +66,33 @@ Aguarde alguns instantes. O Backend aguardará o Banco de Dados estar saudável 
 - Frontend: http://localhost:80 (ou http://localhost:3000 se rodar localmente fora do docker)
 - Backend API: http://localhost:8080
 
+### 📋 Credenciais de Acesso para Testes
+Para facilitar a validação das funcionalidades do sistema, o banco de dados foi populado com usuários pré-cadastrados representando os três níveis de acesso (roles) exigidos:
+
+1. Administrador (Role: ADMIN)
+
+- Permissões: Criar novos usuários (admins/corretores), cadastrar e gerenciar qualquer imóvel.
+
+- E-mail: admin@imobiliaria.com
+
+- Senha: 123456
+
+2. Corretor (Role: CORRETOR)
+
+- Permissões: Cadastrar novos imóveis e gerenciar apenas os imóveis criados por ele.
+
+- E-mail: corretor@imobiliaria.com
+
+- Senha: 123456
+
+3. Cliente (Role: CLIENTE)
+
+- Permissões: Apenas visualizar imóveis, filtrar e favoritar.
+
+- E-mail: cliente@gmail.com
+
+- Senha: 123456
+
 ## 🧪 Executando Testes (Opcional)Caso queira executar os testes unitários e de integração do Backend separadamente:
 ```Bash
 cd backend
