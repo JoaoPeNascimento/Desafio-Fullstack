@@ -1,4 +1,4 @@
-# Desafio Técnico - Full-Stack Real Estate App
+# Desafio Técnico - Full-Stack
 
 Este projeto é uma aplicação de gestão e consulta de imóveis, desenvolvida como parte de um desafio técnico. A solução utiliza uma arquitetura moderna com **Java 21 (Spring Boot)** no backend e **React (TypeScript)** no frontend, totalmente containerizada com **Docker**.
 
