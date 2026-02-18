@@ -32,7 +32,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<UserDTO> getMe() {
         
         UserDTO user = userService.getMe();

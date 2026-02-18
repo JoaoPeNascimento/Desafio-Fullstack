@@ -38,7 +38,7 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<Page<PropertyDTO>> getAll(
         @RequestParam(required = false) String name,
             @RequestParam(required = false) PropertyType type,
@@ -51,6 +51,13 @@ public class PropertyController {
         return ResponseEntity.ok(page);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PropertyDTO> getPropertyById(@PathVariable Long id) {
+        PropertyDTO property = propertyService.findPropertyById(id);
+
+        return ResponseEntity.ok(property);
+    }
+
     @GetMapping("/getUserProperties")
     public ResponseEntity<List<PropertyDTO>> getUserProperties() {
         List<PropertyDTO> list = propertyService.findAllByBrokerId();
@@ -58,7 +65,7 @@ public class PropertyController {
         return ResponseEntity.ok(list);
     }
     
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<PropertyDTO> create(
         @RequestBody @Valid PropertyCreateDTO dto
     ) {

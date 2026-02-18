@@ -71,6 +71,14 @@ public class PropertyService {
     }
 
     @Transactional(readOnly = true)
+    public PropertyDTO findPropertyById(Long id) {
+        Property property = propertyRepository.findById(id)
+                                .orElseThrow(() -> new RuntimeException("Imóvel não encontrado"));
+
+        return new PropertyDTO(property);
+    }
+
+    @Transactional(readOnly = true)
     public List<PropertyDTO> findAllByBrokerId() {
         
         User currentUser = userService.getAuthenticatedUser();
