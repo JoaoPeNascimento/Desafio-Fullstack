@@ -25,6 +25,7 @@ public class TokenService {
                     .withIssuer("imobiliaria-api")
                     .withSubject(user.getEmail())
                     .withClaim("role", user.getRole().name())
+                    .withClaim("id", user.getId())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
