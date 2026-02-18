@@ -16,7 +16,8 @@ public record PropertyDTO(
         String state,
         Boolean active,
         Long brokerId,
-        String brokerName
+        String brokerName,
+        String imageUrls
 ) {
     public PropertyDTO(Property entity) {
         this(
@@ -32,7 +33,8 @@ public record PropertyDTO(
                 entity.getState(),
                 entity.getActive(),
                 entity.getBroker().getId(),
-                entity.getBroker().getName()
+                entity.getBroker().getName(), 
+                entity.getImageUrls()
         );
     }
 }

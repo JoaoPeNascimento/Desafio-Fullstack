@@ -56,7 +56,7 @@ class PropertyServiceTest {
         });
 
         PropertyCreateDTO dto = new PropertyCreateDTO(
-            "Casa", "Descrição", PropertyType.CASA, 500.0, 50, 2, "rua 1", "Recife", "PE"
+            "Casa", "Descrição", PropertyType.CASA, 500.0, 50, 2, "rua 1", "Recife", "PE", null
         );
 
         PropertyDTO result = propertyService.create(dto);
@@ -75,7 +75,7 @@ class PropertyServiceTest {
         when(userService.getAuthenticatedUser()).thenReturn(cliente);
 
         PropertyCreateDTO dto = new PropertyCreateDTO(
-            "Casa", "Descrição", PropertyType.CASA, 500.0, 50, 2, "rua 1", "Recife", "PE"
+            "Casa", "Descrição", PropertyType.CASA, 500.0, 50, 2, "rua 1", "Recife", "PE", null
         );
 
         assertThrows(RuntimeException.class, () -> propertyService.create(dto));

@@ -1,6 +1,7 @@
 package com.joaopenascimento.backend.dto.property;
 
 import com.joaopenascimento.backend.model.enums.PropertyType;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -15,5 +16,6 @@ public record PropertyCreateDTO(
         @NotNull @Positive Integer bedrooms,
         @NotBlank String address,
         @NotBlank String city,
-        @NotBlank String state
+        @NotBlank String state,
+        @NotBlank String imageUrls
 ) {}

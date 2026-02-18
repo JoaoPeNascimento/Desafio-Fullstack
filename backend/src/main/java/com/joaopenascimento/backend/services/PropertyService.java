@@ -111,6 +111,7 @@ public class PropertyService {
         property.setCity(dto.city());
         property.setState(dto.state());
         property.setType(dto.type());
+        property.setImageUrls(dto.imageUrls());
         property.setBroker(currentUser);
 
         propertyRepository.save(property);

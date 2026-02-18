@@ -1,12 +1,28 @@
 package com.joaopenascimento.backend.model;
 
 import com.joaopenascimento.backend.model.enums.PropertyType;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -50,7 +66,7 @@ public class Property {
     private Integer area;
 
     @NotNull(message = "O número de quartos é obrigatório")
-    @Positive(message = "O número de quartos deve ser positivo")
+    @PositiveOrZero(message = "O número de quartos deve ser positivo")
     @Column(nullable = false)
     private Integer bedrooms;
 
@@ -65,6 +81,11 @@ public class Property {
     @NotBlank
     @Column(nullable = false)
     private String state;
+
+    @NotBlank
+    @Column(name = "property_images", nullable = false)
+    private String imageUrls;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "broker_id", nullable = false)
