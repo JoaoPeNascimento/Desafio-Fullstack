@@ -11,7 +11,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import { useAuthStore } from "../store/useAuthStore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -25,6 +25,12 @@ const Header = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    handleClose();
+    useAuthStore.getState().logout();
+    navigate("/");
   };
 
   const handleFavoritesPage = () => {
@@ -45,7 +51,9 @@ const Header = () => {
   return (
     <header className="App-header">
       <div className="user-info">
-        <h1>IMOBILIARIA</h1>
+        <Link to="/home" className="logo-link">
+          <h1>IMOBILIARIA</h1>
+        </Link>
         <Button
           id="user-btn"
           aria-controls={open ? "basic-menu" : undefined}
@@ -85,7 +93,7 @@ const Header = () => {
               Meus imóveis
             </MenuItem>
           )}
-          <MenuItem onClick={handleClose} className="menu-item">
+          <MenuItem onClick={handleLogout} className="menu-item">
             <LogOutIcon size={16} className="logout-icon" />
             Logout
           </MenuItem>
