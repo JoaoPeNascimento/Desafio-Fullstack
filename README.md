@@ -93,6 +93,15 @@ Para facilitar a validação das funcionalidades do sistema, o banco de dados fo
 
 - Senha: 123456
 
+## 📚 Documentação da API (Swagger)
+
+A aplicação possui documentação interativa gerada automaticamente via **Swagger UI**. Após iniciar o backend, você pode acessar:
+
+- **Interface Visual (Swagger UI):** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **Documentação JSON (OpenAPI):** [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+
+> **Nota:** Para testar os endpoints protegidos, utilize o botão **Authorize** no topo da página do Swagger e insira o token JWT retornado na rota de `/login` (formato: `Bearer <seu_token>`).
+
 ## 🧪 Executando Testes (Opcional)Caso queira executar os testes unitários e de integração do Backend separadamente:
 ```Bash
 cd backend
