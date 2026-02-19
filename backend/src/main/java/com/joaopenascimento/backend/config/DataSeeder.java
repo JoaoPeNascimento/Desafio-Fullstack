@@ -101,7 +101,7 @@ public class DataSeeder implements CommandLineRunner {
         prop3.setType(PropertyType.TERRENO);
         prop3.setValue(450000.0);
         prop3.setArea(500);
-        prop3.setBedrooms(0); // Lembre-se que validamos @PositiveOrZero
+        prop3.setBedrooms(0); 
         prop3.setAddress("BR 232, Km 10");
         prop3.setCity("Gravatá");
         prop3.setState("PE");
